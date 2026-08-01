@@ -328,15 +328,84 @@
             </div>
           </div>
           <span class="form-message" id="bookingFormMessage"></span>
-          <button type="submit" class="btn btn-primary modal-submit">Confirm Booking</button>
+          <button type="submit" class="btn btn-primary modal-submit">Continue to Payment <i class="fas fa-arrow-right"></i></button>
         </form>
+      </div>
+
+      <div class="modal-body" id="bookingPaymentView" hidden>
+        <h3>Payment</h3>
+        <div class="booking-summary">
+          <h4 id="paymentPackageName"></h4>
+          <div class="booking-summary-meta">
+            <span id="paymentPackagePrice"></span>
+          </div>
+        </div>
+
+        <div class="pay-methods">
+          <button type="button" class="pay-method-btn active" data-method="mobile" id="methodMobileBtn">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Mobile Banking</span>
+          </button>
+          <button type="button" class="pay-method-btn" data-method="card" id="methodCardBtn">
+            <i class="fas fa-credit-card"></i>
+            <span>Card</span>
+          </button>
+        </div>
+
+        <form id="mobilePayForm" novalidate>
+          <div class="form-field">
+            <label for="mobileProvider">Mobile Banking Provider</label>
+            <select id="mobileProvider">
+              <option value="bKash">bKash</option>
+              <option value="Nagad">Nagad</option>
+              <option value="Rocket">Rocket</option>
+              <option value="UPay">UPay</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="mobileNumber">Mobile Number</label>
+            <input type="tel" id="mobileNumber" placeholder="01XXXXXXXXX" maxlength="11">
+          </div>
+          <div class="form-field">
+            <label for="mobilePin">Mobile Banking PIN</label>
+            <input type="password" id="mobilePin" placeholder="Enter your PIN" maxlength="4" inputmode="numeric">
+          </div>
+          <span class="form-message" id="mobilePayMessage"></span>
+          <button type="submit" class="btn btn-primary modal-submit">Pay <span id="mobilePayAmount"></span></button>
+        </form>
+
+        <form id="cardPayForm" novalidate hidden>
+          <div class="form-field">
+            <label for="cardName">Name on Card</label>
+            <input type="text" id="cardName" placeholder="e.g. SARAH MITCHELL" autocomplete="cc-name">
+          </div>
+          <div class="form-field">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number">
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cardExpiry">Expiry (MM/YY)</label>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" inputmode="numeric" autocomplete="cc-exp">
+            </div>
+            <div class="form-field">
+              <label for="cardCvc">CVC</label>
+              <input type="text" id="cardCvc" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+            </div>
+          </div>
+          <span class="form-message" id="cardPayMessage"></span>
+          <button type="submit" class="btn btn-primary modal-submit">Pay <span id="cardPayAmount"></span></button>
+        </form>
+
+        <button type="button" class="back-link" id="backToDetailsBtn"><i class="fas fa-arrow-left"></i> Back to booking details</button>
       </div>
 
       <div class="modal-body success-view" id="bookingSuccessView" hidden>
         <div class="success-icon"><i class="fas fa-check"></i></div>
-        <h3>Booking Confirmed!</h3>
+        <h3>Payment Successful!</h3>
         <p>Thank you, <span id="successName"></span>! Your trip to <strong id="successPackage"></strong> has been booked.</p>
         <p>Booking Reference: <strong id="successRef"></strong></p>
+        <p>Paid via <strong id="successPayment"></strong>: <span id="successPaidAmount"></span></p>
         <p class="success-note">A confirmation email with your itinerary has been sent to <span id="successEmail"></span>.</p>
         <button type="button" class="btn btn-primary" id="successDoneBtn">Done</button>
       </div>

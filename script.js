@@ -201,13 +201,19 @@ function renderPackages() {
 function initBookingButtons() {
   let currentPackage = null;
   let bookedButton = null;
+  let paymentMethod = 'mobile';
 
   const modal = document.getElementById('bookingModal');
   const closeBtn = document.getElementById('modalCloseBtn');
   const formView = document.getElementById('bookingFormView');
+  const paymentView = document.getElementById('bookingPaymentView');
   const successView = document.getElementById('bookingSuccessView');
   const form = document.getElementById('bookingForm');
   const formMessage = document.getElementById('bookingFormMessage');
+  const mobilePayForm = document.getElementById('mobilePayForm');
+  const cardPayForm = document.getElementById('cardPayForm');
+  const mobilePayMessage = document.getElementById('mobilePayMessage');
+  const cardPayMessage = document.getElementById('cardPayMessage');
 
   function openModal(pkg) {
     currentPackage = pkg;
@@ -215,9 +221,12 @@ function initBookingButtons() {
     document.getElementById('bookingPackageDuration').innerHTML =
       pkg.duration ? `<i class="far fa-clock"></i> ${pkg.duration}` : '';
     document.getElementById('bookingPackagePrice').textContent = pkg.price;
+    document.getElementById('paymentPackageName').textContent = pkg.name;
+    document.getElementById('paymentPackagePrice').textContent = pkg.price;
+    document.getElementById('mobilePayAmount').textContent = pkg.price;
+    document.getElementById('cardPayAmount').textContent = pkg.price;
 
-    formView.hidden = false;
-    successView.hidden = true;
+    showStep(formView);
     form.reset();
     formMessage.textContent = '';
     formMessage.className = 'form-message';
@@ -233,6 +242,41 @@ function initBookingButtons() {
     document.body.style.overflow = '';
     currentPackage = null;
     bookedButton = null;
+  }
+
+  function showStep(view) {
+    [formView, paymentView, successView].forEach(v => { v.hidden = true; });
+    view.hidden = false;
+  }
+
+  function selectMethod(method) {
+    paymentMethod = method;
+    document.getElementById('methodMobileBtn').classList.toggle('active', method === 'mobile');
+    document.getElementById('methodCardBtn').classList.toggle('active', method === 'card');
+    mobilePayForm.hidden = method !== 'mobile';
+    cardPayForm.hidden = method !== 'card';
+  }
+
+  function markBooked() {
+    if (bookedButton) {
+      bookedButton.textContent = 'Booked';
+      bookedButton.disabled = true;
+      bookedButton.classList.add('booked');
+      bookedButton.setAttribute('aria-pressed', 'true');
+    }
+  }
+
+  function showSuccess(name, email, paymentLabel) {
+    document.getElementById('successName').textContent = name;
+    document.getElementById('successPackage').textContent = currentPackage.name;
+    document.getElementById('successRef').textContent =
+      'WND-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+    document.getElementById('successEmail').textContent = email;
+    document.getElementById('successPayment').textContent = paymentLabel;
+    document.getElementById('successPaidAmount').textContent = currentPackage.price;
+
+    markBooked();
+    showStep(successView);
   }
 
   document.querySelectorAll('.book-now-btn').forEach(button => {
@@ -257,6 +301,13 @@ function initBookingButtons() {
     if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
 
+  document.getElementById('methodMobileBtn').addEventListener('click', () => selectMethod('mobile'));
+  document.getElementById('methodCardBtn').addEventListener('click', () => selectMethod('card'));
+
+  document.getElementById('backToDetailsBtn').addEventListener('click', () => {
+    showStep(formView);
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -266,38 +317,117 @@ function initBookingButtons() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name) {
-      showFormError('Please enter your full name.');
+      formMessage.textContent = 'Please enter your full name.';
+      formMessage.className = 'form-message error';
       return;
     }
     if (!email || !emailRegex.test(email)) {
-      showFormError('Please enter a valid email address.');
+      formMessage.textContent = 'Please enter a valid email address.';
+      formMessage.className = 'form-message error';
       return;
     }
     if (!date) {
-      showFormError('Please choose a travel date.');
+      formMessage.textContent = 'Please choose a travel date.';
+      formMessage.className = 'form-message error';
       return;
     }
 
-    document.getElementById('successName').textContent = name;
-    document.getElementById('successPackage').textContent = currentPackage.name;
-    document.getElementById('successRef').textContent =
-      'WND-' + Math.random().toString(36).slice(2, 8).toUpperCase();
-    document.getElementById('successEmail').textContent = email;
-
-    if (bookedButton) {
-      bookedButton.textContent = 'Booked';
-      bookedButton.disabled = true;
-      bookedButton.classList.add('booked');
-      bookedButton.setAttribute('aria-pressed', 'true');
-    }
-
-    formView.hidden = true;
-    successView.hidden = false;
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+    showStep(paymentView);
   });
 
-  function showFormError(message) {
-    formMessage.textContent = message;
-    formMessage.className = 'form-message error';
+  mobilePayForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const number = document.getElementById('mobileNumber').value.replace(/\s+/g, '');
+    const pin = document.getElementById('mobilePin').value;
+    const provider = document.getElementById('mobileProvider').value;
+    const phoneRegex = /^01[3-9]\d{8}$/;
+
+    if (!phoneRegex.test(number)) {
+      mobilePayMessage.textContent = 'Please enter a valid 11-digit mobile number (e.g. 01712345678).';
+      mobilePayMessage.className = 'form-message error';
+      return;
+    }
+    if (!/^\d{4}$/.test(pin)) {
+      mobilePayMessage.textContent = 'Please enter your 4-digit PIN.';
+      mobilePayMessage.className = 'form-message error';
+      return;
+    }
+
+    simulatePayment(mobilePayForm.querySelector('button[type="submit"]'),
+      () => showSuccess(
+        document.getElementById('bookingName').value.trim(),
+        document.getElementById('bookingEmail').value.trim(),
+        provider
+      ));
+  });
+
+  cardPayForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('cardName').value.trim();
+    const number = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+    const expiry = document.getElementById('cardExpiry').value.trim();
+    const cvc = document.getElementById('cardCvc').value;
+    const cardRegex = /^\d{16}$/;
+
+    if (!name) {
+      cardPayMessage.textContent = 'Please enter the name on the card.';
+      cardPayMessage.className = 'form-message error';
+      return;
+    }
+    if (!cardRegex.test(number)) {
+      cardPayMessage.textContent = 'Please enter a valid 16-digit card number.';
+      cardPayMessage.className = 'form-message error';
+      return;
+    }
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+      cardPayMessage.textContent = 'Please enter a valid expiry date (MM/YY).';
+      cardPayMessage.className = 'form-message error';
+      return;
+    }
+    if (!/^\d{3,4}$/.test(cvc)) {
+      cardPayMessage.textContent = 'Please enter a valid CVC.';
+      cardPayMessage.className = 'form-message error';
+      return;
+    }
+
+    simulatePayment(cardPayForm.querySelector('button[type="submit"]'),
+      () => showSuccess(
+        document.getElementById('bookingName').value.trim(),
+        document.getElementById('bookingEmail').value.trim(),
+        'Card (**** ' + number.slice(-4) + ')'
+      ));
+  });
+
+  const cardNumberInput = document.getElementById('cardNumber');
+  cardNumberInput.addEventListener('input', () => {
+    const digits = cardNumberInput.value.replace(/\D+/g, '').slice(0, 16);
+    cardNumberInput.value = digits.replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  const cardExpiryInput = document.getElementById('cardExpiry');
+  cardExpiryInput.addEventListener('input', () => {
+    const digits = cardExpiryInput.value.replace(/\D+/g, '').slice(0, 4);
+    if (digits.length >= 3) {
+      cardExpiryInput.value = digits.slice(0, 2) + '/' + digits.slice(2);
+    } else {
+      cardExpiryInput.value = digits;
+    }
+  });
+
+  function simulatePayment(button, onDone) {
+    const original = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+    setTimeout(() => {
+      button.disabled = false;
+      button.innerHTML = original;
+      onDone();
+    }, 1200);
   }
 }
 
