@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wanderly — Your premium travel agency for curated adventures worldwide. Explore destinations, book packages, and travel with confidence.">
+  <meta name="keywords" content="travel agency, vacation packages, Bali, Switzerland, Maldives, Japan, adventure travel">
+  <meta name="author" content="Wanderly Travels">
+  <title>Wanderly — Explore the World, Your Way</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- HEADER / NAVBAR                              -->
+  <!-- ============================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-compass"></i> Wanderly
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#destinations" class="nav-link">Destinations</a>
+        <a href="#packages" class="nav-link">Packages</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION                                 -->
+  <!-- ============================================ -->
+  <section class="hero" id="home">
+    <!-- Carousel backgrounds -->
+    <div class="hero-carousel">
+      <div class="carousel-slide active" style="background-image: url('https://picsum.photos/seed/wanderly-hero1/1920/1080')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/wanderly-hero2/1920/1080')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/wanderly-hero3/1920/1080')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/wanderly-hero4/1920/1080')"></div>
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Hero content -->
+    <div class="container hero-content">
+      <h1 class="hero-title">Discover Your Next Adventure</h1>
+      <p class="hero-subtitle">Curated travel experiences that turn your wanderlust into unforgettable memories.</p>
+
+      <!-- Search / Booking Bar -->
+      <div class="search-bar">
+        <div class="search-field">
+          <label for="search-destination"><i class="fas fa-map-marker-alt"></i></label>
+          <input type="text" id="search-destination" placeholder="Where to?" autocomplete="off">
+        </div>
+        <div class="search-field">
+          <label for="check-in"><i class="fas fa-calendar-alt"></i></label>
+          <input type="date" id="check-in">
+        </div>
+        <div class="search-field">
+          <label for="check-out"><i class="fas fa-calendar-alt"></i></label>
+          <input type="date" id="check-out">
+        </div>
+        <div class="search-field">
+          <label for="guests"><i class="fas fa-user"></i></label>
+          <select id="guests">
+            <option value="1">1 Guest</option>
+            <option value="2" selected>2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5+ Guests</option>
+          </select>
+        </div>
+        <button class="btn btn-primary search-btn" id="searchBtn">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+
+      <a href="#destinations" class="btn btn-outline hero-cta">Explore Destinations <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- Carousel indicators -->
+    <div class="carousel-indicators" id="carouselIndicators">
+      <span class="indicator active" data-slide="0"></span>
+      <span class="indicator" data-slide="1"></span>
+      <span class="indicator" data-slide="2"></span>
+      <span class="indicator" data-slide="3"></span>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FEATURED DESTINATIONS                        -->
+  <!-- ============================================ -->
+  <section class="section destinations" id="destinations">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Featured Destinations</h2>
+        <p>Handpicked escapes for every kind of traveler</p>
+      </div>
+
+      <div class="destination-grid" id="destinationGrid">
+        <!-- Cards are rendered by JavaScript -->
+      </div>
+
+      <div class="text-center fade-in">
+        <a href="#" class="btn btn-secondary">View All Destinations <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- WHY CHOOSE US                                -->
+  <!-- ============================================ -->
+  <section class="section why-us" id="about">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Why Choose Wanderly</h2>
+        <p>We go beyond booking — we craft experiences</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-tag"></i>
+          </div>
+          <h3>Best Price Guarantee</h3>
+          <p>We match any price and beat it by 10%. Your dream trip shouldn't break the bank.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Our travel experts are available around the clock, so you're never alone on your journey.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Verified Reviews</h3>
+          <p>Every review is from a real traveler. No filters, no fluff — just honest feedback.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Flexible Booking</h3>
+          <p>Change or cancel free of charge up to 48 hours before departure. Stress-free planning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- POPULAR PACKAGES / TOURS                     -->
+  <!-- ============================================ -->
+  <section class="section packages" id="packages">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Popular Packages</h2>
+        <p>All-inclusive tours designed for the ultimate experience</p>
+      </div>
+
+      <div class="packages-grid" id="packagesGrid">
+        <!-- Cards are rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- TESTIMONIALS                                 -->
+  <!-- ============================================ -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>What Our Travelers Say</h2>
+        <p>Real stories from real explorers</p>
+      </div>
+
+      <div class="testimonials-grid" id="testimonialsGrid">
+        <!-- Cards are rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- NEWSLETTER SIGNUP                            -->
+  <!-- ============================================ -->
+  <section class="section newsletter">
+    <div class="container">
+      <div class="newsletter-content fade-in">
+        <h2>Get Inspired</h2>
+        <p>Subscribe for exclusive deals, travel tips, and destination guides delivered to your inbox.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="newsletter-input-group">
+            <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <span class="newsletter-message" id="newsletterMessage"></span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-col footer-brand">
+          <a href="#" class="logo">
+            <i class="fas fa-compass"></i> Wanderly
+          </a>
+          <p>Your trusted travel companion for curated adventures around the globe. Let's explore together.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Top Destinations -->
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <ul>
+            <li><a href="#">Bali, Indonesia</a></li>
+            <li><a href="#">Swiss Alps</a></li>
+            <li><a href="#">Maldives</a></li>
+            <li><a href="#">Tokyo, Japan</a></li>
+            <li><a href="#">Santorini, Greece</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="contact-list">
+            <li><i class="fas fa-envelope"></i> hello@wanderly.com</li>
+            <li><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</li>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Traveler St, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2027 Wanderly Travel Agency. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script src="script.js"></script>
+</body>
+</html>
