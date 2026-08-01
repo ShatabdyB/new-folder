@@ -54,7 +54,7 @@ const destinationsData = [
     name: 'Maldives',
     description: 'Overwater bungalows, crystal-clear lagoons, and pristine white sands.',
     price: '৳1,899',
-    image: 'https://source.unsplash.com/featured/600x400/?maldives,watervilla',
+    image: 'images/maldives.jpg',
     alt: 'Overwater bungalows in the Maldives'
   },
   {
@@ -62,7 +62,7 @@ const destinationsData = [
     name: 'Tokyo, Japan',
     description: 'A dazzling fusion of ancient tradition and futuristic innovation.',
     price: '৳1,299',
-    image: 'https://source.unsplash.com/featured/600x400/?tokyo,city',
+    image: 'images/tokyo.jpg',
     alt: 'Illuminated Tokyo cityscape at night'
   },
   {
