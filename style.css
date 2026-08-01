@@ -1211,3 +1211,8 @@ p { color: var(--text-muted); }
 .back-link:hover {
   color: var(--secondary);
 }
+
+/* Ensure the hidden attribute always wins over display rules */
+[hidden] {
+  display: none !important;
+}
