@@ -284,6 +284,66 @@
   </footer>
 
   <!-- ============================================ -->
+  <!-- BOOKING MODAL                               -->
+  <!-- ============================================ -->
+  <div class="modal-overlay" id="bookingModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close booking form">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-body" id="bookingFormView">
+        <h3 id="bookingModalTitle">Book Your Trip</h3>
+        <div class="booking-summary">
+          <h4 id="bookingPackageName"></h4>
+          <div class="booking-summary-meta">
+            <span id="bookingPackageDuration"></span>
+            <span id="bookingPackagePrice"></span>
+          </div>
+        </div>
+
+        <form id="bookingForm" novalidate>
+          <div class="form-field">
+            <label for="bookingName">Full Name</label>
+            <input type="text" id="bookingName" placeholder="e.g. Sarah Mitchell" autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="bookingEmail">Email Address</label>
+            <input type="email" id="bookingEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="bookingDate">Travel Date</label>
+              <input type="date" id="bookingDate">
+            </div>
+            <div class="form-field">
+              <label for="bookingGuests">Guests</label>
+              <select id="bookingGuests">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5+</option>
+              </select>
+            </div>
+          </div>
+          <span class="form-message" id="bookingFormMessage"></span>
+          <button type="submit" class="btn btn-primary modal-submit">Confirm Booking</button>
+        </form>
+      </div>
+
+      <div class="modal-body success-view" id="bookingSuccessView" hidden>
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h3>Booking Confirmed!</h3>
+        <p>Thank you, <span id="successName"></span>! Your trip to <strong id="successPackage"></strong> has been booked.</p>
+        <p>Booking Reference: <strong id="successRef"></strong></p>
+        <p class="success-note">A confirmation email with your itinerary has been sent to <span id="successEmail"></span>.</p>
+        <button type="button" class="btn btn-primary" id="successDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
   <!-- JAVASCRIPT                                   -->
   <!-- ============================================ -->
   <script src="script.js"></script>

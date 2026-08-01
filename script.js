@@ -199,18 +199,106 @@ function renderPackages() {
 }
 
 function initBookingButtons() {
+  let currentPackage = null;
+  let bookedButton = null;
+
+  const modal = document.getElementById('bookingModal');
+  const closeBtn = document.getElementById('modalCloseBtn');
+  const formView = document.getElementById('bookingFormView');
+  const successView = document.getElementById('bookingSuccessView');
+  const form = document.getElementById('bookingForm');
+  const formMessage = document.getElementById('bookingFormMessage');
+
+  function openModal(pkg) {
+    currentPackage = pkg;
+    document.getElementById('bookingPackageName').textContent = pkg.name;
+    document.getElementById('bookingPackageDuration').innerHTML =
+      pkg.duration ? `<i class="far fa-clock"></i> ${pkg.duration}` : '';
+    document.getElementById('bookingPackagePrice').textContent = pkg.price;
+
+    formView.hidden = false;
+    successView.hidden = true;
+    form.reset();
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+    document.getElementById('bookingDate').min = new Date().toISOString().split('T')[0];
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('bookingName').focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    currentPackage = null;
+    bookedButton = null;
+  }
+
   document.querySelectorAll('.book-now-btn').forEach(button => {
     button.addEventListener('click', () => {
+      if (button.disabled) return;
       const packageId = Number(button.dataset.packageId);
       const pkg = packagesData.find(item => item.id === packageId);
-      if (!pkg || button.disabled) return;
-
-      button.textContent = 'Booked';
-      button.disabled = true;
-      button.classList.add('booked');
-      button.setAttribute('aria-pressed', 'true');
+      if (!pkg) return;
+      bookedButton = button;
+      openModal(pkg);
     });
   });
+
+  closeBtn.addEventListener('click', closeModal);
+  document.getElementById('successDoneBtn').addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('bookingName').value.trim();
+    const email = document.getElementById('bookingEmail').value.trim();
+    const date = document.getElementById('bookingDate').value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name) {
+      showFormError('Please enter your full name.');
+      return;
+    }
+    if (!email || !emailRegex.test(email)) {
+      showFormError('Please enter a valid email address.');
+      return;
+    }
+    if (!date) {
+      showFormError('Please choose a travel date.');
+      return;
+    }
+
+    document.getElementById('successName').textContent = name;
+    document.getElementById('successPackage').textContent = currentPackage.name;
+    document.getElementById('successRef').textContent =
+      'WND-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+    document.getElementById('successEmail').textContent = email;
+
+    if (bookedButton) {
+      bookedButton.textContent = 'Booked';
+      bookedButton.disabled = true;
+      bookedButton.classList.add('booked');
+      bookedButton.setAttribute('aria-pressed', 'true');
+    }
+
+    formView.hidden = true;
+    successView.hidden = false;
+  });
+
+  function showFormError(message) {
+    formMessage.textContent = message;
+    formMessage.className = 'form-message error';
+  }
 }
 
 function renderTestimonials() {
