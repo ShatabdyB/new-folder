@@ -14,7 +14,7 @@ const destinationsData = [
     name: 'European Explorer',
     description: 'Visit 5 European capitals in 12 days — Paris, Rome, Vienna, Prague, and London.',
     price: '৳2,499',
-    image: 'https://static.vecteezy.com/system/resources/previews/037/046/007/non_2x/explorer-with-backpack-holding-a-map-and-binoculars-cartoon-character-illustration-isolated-on-white-background-vector.jpg',
+    image: 'images/europe.jpg',
     alt: 'European explorer cartoon illustration with map and binoculars'
   },
   {
@@ -22,7 +22,7 @@ const destinationsData = [
     name: 'Tropical Paradise',
     description: 'Relax in the Maldives and Bali with overwater villas, spa treatments, and sunset cruises.',
     price: '৳1,899',
-    image: 'https://www.travelandleisure.com/thmb/Jt-1G4nHTv2t9vJcZg9i9cX1vKc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-tropical-vacations-around-the-world-7095140-2-5e0c31b735594375be0c51e4e2dae15b.jpg',
+    image: 'images/tropical.jpg',
     alt: 'Beautiful tropical paradise beach with turquoise waters'
   },
   {
@@ -30,7 +30,7 @@ const destinationsData = [
     name: 'Adventure Trail',
     description: 'New Zealand and Iceland — bungee jumping, glacier hiking, and volcano tours.',
     price: '৳2,199',
-    image: 'https://images.pexels.com/photos/1408821/pexels-photo-1408821.jpeg',
+    image: 'images/adventure.jpg',
     alt: 'Adventure hiking trail through New Zealand mountains'
   },
   {
@@ -38,15 +38,15 @@ const destinationsData = [
     name: 'Bali, Indonesia',
     description: 'Tropical paradise with ancient temples, lush rice terraces, and vibrant culture.',
     price: '৳899',
-    image: 'https://images.pexels.com/photos/1408821/pexels-photo-1408821.jpeg',
-    alt: 'Tropical beach in Bali with lush greenery'
+    image: 'images/bali.jpg',
+    alt: 'Canoe on water with a pagoda in Bali'
   },
   {
     id: 2,
     name: 'Swiss Alps',
     description: 'Majestic mountain peaks, charming villages, and world-class skiing.',
     price: '৳1,499',
-    image: 'https://source.unsplash.com/featured/600x400/?swiss,alps',
+    image: 'images/swiss.jpg',
     alt: 'Snow-capped Swiss Alps mountain landscape'
   },
   {
@@ -70,7 +70,7 @@ const destinationsData = [
     name: 'Santorini, Greece',
     description: 'Iconic white-washed buildings, stunning sunsets, and azure waters.',
     price: '৳1,099',
-    image: 'https://source.unsplash.com/featured/600x400/?santorini,sea',
+    image: 'images/santorini.jpg',
     alt: 'White-washed buildings in Santorini overlooking the sea'
   },
   {
@@ -78,7 +78,7 @@ const destinationsData = [
     name: 'Queenstown, New Zealand',
     description: 'Adventure capital with bungee jumping, skiing, and breathtaking fjords.',
     price: '৳1,699',
-    image: 'https://source.unsplash.com/featured/600x400/?queenstown,newzealand',
+    image: 'images/queenstown.jpg',
     alt: 'Lake Wakatipu and mountains in Queenstown'
   },
   {
@@ -86,7 +86,7 @@ const destinationsData = [
     name: 'Iceland',
     description: 'Northern lights, geothermal springs, volcanoes, and otherworldly landscapes.',
     price: '৳1,599',
-    image: 'https://source.unsplash.com/featured/600x400/?iceland,aurora',
+    image: 'images/iceland.jpg',
     alt: 'Northern lights dancing over an Icelandic landscape'
   },
   {
@@ -94,7 +94,7 @@ const destinationsData = [
     name: 'Marrakech, Morocco',
     description: 'Exotic markets, stunning palaces, and the gateway to the Sahara Desert.',
     price: '৳799',
-    image: 'https://source.unsplash.com/featured/600x400/?marrakech,market',
+    image: 'images/marrakech.jpg',
     alt: 'Vibrant market street in Marrakech'
   }
 ];
@@ -107,7 +107,7 @@ const packagesData = [
     description: 'Visit 5 European capitals in 12 days — Paris, Rome, Vienna, Prague, and London.',
     duration: '12 Days',
     price: '৳2,499',
-    image: 'https://static.vecteezy.com/system/resources/previews/037/046/007/non_2x/explorer-with-backpack-holding-a-map-and-binoculars-cartoon-character-illustration-isolated-on-white-background-vector.jpg',
+    image: 'images/europe.jpg',
     alt: 'European explorer cartoon illustration with map and binoculars'
   },
   {
@@ -116,7 +116,7 @@ const packagesData = [
     description: 'Relax in the Maldives and Bali with overwater villas, spa treatments, and sunset cruises.',
     duration: '7 Days',
     price: '৳1,899',
-    image: 'https://www.travelandleisure.com/thmb/Jt-1G4nHTv2t9vJcZg9i9cX1vKc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-tropical-vacations-around-the-world-7095140-2-5e0c31b735594375be0c51e4e2dae15b.jpg',
+    image: 'images/tropical.jpg',
     alt: 'Beautiful tropical paradise beach with turquoise waters'
   },
   {
@@ -125,7 +125,7 @@ const packagesData = [
     description: 'New Zealand and Iceland — bungee jumping, glacier hiking, and volcano tours.',
     duration: '10 Days',
     price: '৳2,199',
-    image: 'https://images.pexels.com/photos/1408821/pexels-photo-1408821.jpeg',
+    image: 'images/adventure.jpg',
     alt: 'Adventure hiking trail through New Zealand mountains'
   }
 ];
